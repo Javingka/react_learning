@@ -1,5 +1,4 @@
 module.exports = {
-
   entry: './app/app.jsx',
   output: {
     path: __dirname,
@@ -7,15 +6,24 @@ module.exports = {
   },
   resolve: {
     root: __dirname,
-    alias: {},
-    extensions: ['','.js','.jsx']
+    alias: {
+      Main: 'app/components/Main.jsx',
+      Nav: 'app/components/Nav.jsx',
+      Weather: 'app/components/Weather.jsx',
+      WeatherForm: 'app/components/WeatherForm.jsx',
+      WeatherMessage: 'app/components/WeatherMessage.jsx',
+      About: 'app/components/About.jsx',
+      Example: 'app/components/Example.jsx',
+      OpenWeatherMap: 'app/api/openWeatherMap.jsx'
+    },
+    extensions: ['', '.js', '.jsx']
   },
   module: {
     loaders: [
       {
         loader: 'babel-loader',
         query: {
-          presets: [ 'react', 'es2015' ]
+          presets: ['react', 'es2015', 'stage-0']
         },
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/
