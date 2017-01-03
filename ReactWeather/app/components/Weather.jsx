@@ -7,8 +7,7 @@ var Weather = React.createClass({
 
   getInitialState: function(){
     return {
-      location: 'Miami',
-      temp: 88
+      isLoading: false
     }
   },
 
@@ -16,14 +15,18 @@ var Weather = React.createClass({
     console.log('new data', data);
     var that = this;
 
+    this.setState({ isLoading: true })
+
     openWeatherMap.getTemp( data.location).then(
         function(_temp){
           that.setState({
             location: data.location,
-            temp: _temp
+            temp: _temp,
+            isLoading: false
           });
         },
         function(err){
+          that.setState({ isLoading: false })
           alert(err);
         }
     );
@@ -32,11 +35,21 @@ var Weather = React.createClass({
   render: function(){
     var location = this.state.location;
     var temp  = this.state.temp;
+    var isLoading = this.state.isLoading;
+
+    function renderMessage(){
+      if (isLoading) {
+        return <h3>Fetching weather...</h3>;
+      } else if (temp && location) {
+        return <WeatherMessage location={location} temp={temp}/>;
+      }
+    }
+
     return (
       <div>
         <h3> Weather Component </h3>
         <WeatherForm onNewData={this.handleNewData}/>
-        <WeatherMessage location={location} temp={temp}/>
+        {renderMessage()}
       </div>
     );
   }

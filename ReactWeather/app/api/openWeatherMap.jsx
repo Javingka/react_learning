@@ -9,6 +9,7 @@ module.exports = {
 
     return axios.get(requestUrl).then(
       function(res){
+        console.log('res success', res);
         if (res.data.cod && res.data.message){
           throw new Error(res.data.message);
         } else {
@@ -16,6 +17,7 @@ module.exports = {
         }
       },
       function(res){
+        console.log('res error', res);
         throw new Error(res.data.message)
 
       }) //takes a url and give you back the result. returns a promise!!

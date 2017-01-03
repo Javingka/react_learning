@@ -1,5 +1,6 @@
 var React = require('react');
 
+/*
 var About = React.createClass({
 
   render: function(){
@@ -8,5 +9,13 @@ var About = React.createClass({
     );
   }
 });
+*/
+
+/*Stateless Functional Component*/
+var About = (props) =>{
+  return (
+      <h1> About Component </h1>
+  );
+}
 
 module.exports = About;
